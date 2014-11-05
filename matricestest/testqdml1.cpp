@@ -60,8 +60,10 @@ int main(void)
                           vecmath::vec3( 0.0f, 0.0f, 0.0f ),
                           vecmath::vec3( 0.0f, 1.0f, 0.0f ) );
 
-    vecmath::mat4 Model = vecmath::scale( 1.0f );
+    //vecmath::mat4 Model = vecmath::scale( 1.0f );
 
+    vecmath::mat4 Model = vecmath::mat4::identity();
+	
     vecmath::mat4 MVP = Projection * View * Model;
 
     static const GLfloat vertexBufferData[] = {
