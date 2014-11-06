@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "vecmath.h"
+#include "qdml.h"
 #include "shaders2.h"
 
 
@@ -59,16 +59,16 @@ int main(void)
 
     GLuint matrixID = glGetUniformLocation( testProgram, "MVP" );
 
-    vecmath::mat4 Projection = vecmath::perspective( 45.0f, 4.0f / 3.0f, 0.1f, 100.0f );
+    qdml::mat4 Projection = qdml::perspective( 45.0f, 4.0f / 3.0f, 0.1f, 100.0f );
 
-    vecmath::mat4 View = vecmath::lookAt(
-                          vecmath::vec3( 4.0f, 3.0f, -3.0f ), //camera at (4,3,-3) in world space
-                          vecmath::vec3( 0.0f, 0.0f, 0.0f ), //looking at origin
-                          vecmath::vec3( 0.0f, 1.0f, 0.0f ) ); //head is up (set 0, -1, 0 to look upside down)
+    qdml::mat4 View = qdml::lookAt(
+                          qdml::vec3( 4.0f, 3.0f, -3.0f ), //camera at (4,3,-3) in world space
+                          qdml::vec3( 0.0f, 0.0f, 0.0f ), //looking at origin
+                          qdml::vec3( 0.0f, 1.0f, 0.0f ) ); //head is up (set 0, -1, 0 to look upside down)
 
-    vecmath::mat4 Model = vecmath::mat4::identity();
+    qdml::mat4 Model = qdml::mat4::identity();
 
-    vecmath::mat4 MVP = Projection * View * Model;
+    qdml::mat4 MVP = Projection * View * Model;
 
     static const GLfloat vertexBufferData[] = {
     -1.0f,-1.0f,-1.0f,
