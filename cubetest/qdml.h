@@ -807,7 +807,9 @@ public:
   static inline int height(void) { return h; }
 
 protected:
-  //column primary data (essentially array of vectors)
+  //column major data (essentially array of vectors)
+  //as OpenGL is column major... should I do something
+  //for DirectX in future?
   vecN<T,h> data[w];
 
   //assignment function - called from assignment operator and
