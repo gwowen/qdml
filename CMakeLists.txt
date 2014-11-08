@@ -1,0 +1,8 @@
+cmake_minimum_required( VERSION 2.6)
+project( qdml )
+set( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+find_package(GLFW REQUIRED)
+find_package(GLEW REQUIRED)
+include_directories(${GLEW_INCLUDE_DIR})
+include_directories(${GLFW_INCLUDE_DIR})
+add_subdirectory(cubetest)
