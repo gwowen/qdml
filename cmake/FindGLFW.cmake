@@ -12,7 +12,7 @@ if(WIN32)
 			${GLEW_LOCATION}
 			$ENV{GLFW_LOCATION}
 			DOC "The directory where GL/glew.h resides" )
-		
+
 	#find_file( GLEW_SOURCE
 	#	NAMES
 	#		glew.c
@@ -41,35 +41,20 @@ if(WIN32)
 			$ENV{PROGRAMFILES}/GLFW/lib
 			DOC "The GLFW library" )
 	endif()
-	
+
 	if(UNIX)
+		find_package(PkgConfig)
+		pkg_search_module(GLFW REQUIRED glfw3)
 		find_path( GLFW_INCLUDE_DIR
 			NAMES
 				glfw3.h
-			PATHS
-				${GLFW_LOCATION}/include/GLFW
-				$ENV{GLFW_LOCATION}/include/GLFW
-				/usr/include
-				/usr/local/include
-				/sw/include/
-				/opt/local/include
-				NO_DEFAULT_PATH
-				DOC "The directory where GLFW/glfw3.h resides")
+			HINTS ${GLFW_INCLUDE_DIRS})
 		find_library( GLFW_LIBRARY
 			NAMES
 				glfw3
-			PATHS
-				${GLFW_LOCATION}/lib
-				$ENV{GLFW_LOCATION}/lib
-				/usr/lib64
-				/usr/lib
-				/usr/local/lib64
-				/usr/local/lib
-				/sw/lib
-				/opt/local/lib
-				NO_DEFAULT_PATH
-				DOC "The GLFW library")
+			HINTS
+			${GLFW_STATIC_LIBRARIES})
 endif()
 
-find_package_handle_standard_args( GLFW DEFAULT_MSG GLFW_INCLUDE_DIR GLFW_LIBRARY ) 
+find_package_handle_standard_args( GLFW DEFAULT_MSG GLFW_INCLUDE_DIR GLFW_LIBRARY )
 mark_as_advanced(GLEW FOUND)

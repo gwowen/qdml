@@ -12,7 +12,7 @@ if(WIN32)
 			${GLEW_LOCATION}
 			$ENV{GLEW_LOCATION}
 			DOC "The directory where GL/glew.h resides" )
-		
+
 	#find_file( GLEW_SOURCE
 	#	NAMES
 	#		glew.c
@@ -45,38 +45,26 @@ if(WIN32)
 			$ENV{GLEW_LOCATION}
 			DOC "The GLEW library" )
 	endif()
-	
-	if(UNIX)
-		find_path( GLEW_INCLUDE_DIR
-			NAMES
-				GL/glew.h
-			PATHS
-				${GLEW_LOCATION}/include
-				$ENV{GLEW_LOCATION}/include
-				/usr/include
-				/usr/local/include
-				/sw/include/
-				/opt/local/include
-				NO_DEFAULT_PATH
-				DOC "The directory where GL/glew.h resides")
-		find_library( GLEW_LIBRARY
-			NAMES
-				GLEW glew
-			PATHS
-				${GLEW_LOCATION}/lib
-				$ENV{GLEW_LOCATION}/lib
-				/usr/lib64
-				/usr/lib
-				/usr/local/lib64
-				/usr/local/lib
-				/sw/lib
-				/opt/local/lib
-				NO_DEFAULT_PATH
-				DOC "The GLEW library")
-endif()
 
-find_package_handle_standard_args( GLEW DEFAULT_MSG GLEW_INCLUDE_DIR GLEW_LIBRARY ) 
+	if(UNIX)
+		find_package(PkgConfig)
+		if (PKG_CONFIG_FOUND)
+			pkg_check_modules(PKG_GLEW QUIET glew)
+		endif()
+		# Search for library objects in known paths and optional hint from pkg-config
+		find_library(GLEW_LIBRARY
+			NAMES GLEW
+			HINTS ${PKG_GLEW_LIBRARY_DIRS} ${PKG_GLEW_LIBDIR}
+			)
+# Search for header files in known paths and optional hint from pkg-config
+		find_path(GLEW_INCLUDE_DIR
+			GL/glew.h
+			HINTS ${PKG_GLEW_INCLUDE_DIRS} ${PKG_GLEW_INCLUDEDIR}
+			)
+	endif()
+
+find_package_handle_standard_args( GLEW DEFAULT_MSG GLEW_INCLUDE_DIR GLEW_LIBRARY )
 mark_as_advanced(GLEW FOUND)
 
-			
+
 		
