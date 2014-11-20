@@ -3,6 +3,21 @@
 
 namespace qdml
 {
+
+  //utility functions to convert between radians and degrees
+  template<typename T>
+  inline T toDegrees( T angleInRadians )
+  {
+    return angleInRadians * static_cast<T>( 180.0 / M_PI );
+  }
+
+  template<typename T>
+  inline T toRadians( T angleInDegrees )
+  {
+    return angleInDegrees * static_cast<T>( M_PI / 180.0 );
+
+  }
+
   #ifdef min
   #undef min
   #endif
@@ -80,7 +95,7 @@ namespace qdml
   {
 
   }
-  
+
   template<typename T>
   static inline T mix( const T &A, const T &B, typename T::element_type t )
   {

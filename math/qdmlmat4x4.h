@@ -3,6 +3,7 @@
 
 #include "qdmlmatrix.h"
 #include "qdmlvector.h"
+#include "qdmlutils.h"
 
 
 namespace qdml

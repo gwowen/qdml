@@ -60,7 +60,7 @@ namespace qdml
       inline vecN operator+( const vecN& that ) const
       {
         my_type result;
-        for( int n = 0; n < len; n++ )
+        for( int n = 0; n < len; ++n )
         {
           result.data[n] = data[n] + that.data[n];
         }
