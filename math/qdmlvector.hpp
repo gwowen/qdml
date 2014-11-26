@@ -5,11 +5,10 @@
 
 namespace qdml
 {
-  //vecN - an N-dimensional vector which serves as the base
-  //class for 2, 3 and 4-vectors of various types.
-  //Also contains operators for the vector, which are implemented
-  //once in template form so we don't have to repeatedly implement
-  //for vec2, vec3, etc.
+  //@class vecN "math/qdmlvector.hpp"
+  //@brief N-dimensional base class vector
+  //@tparam T type of vecN elements
+  //@tparam len length of vecN
   template<typename T, const int len>
   class vecN
   {
@@ -17,20 +16,23 @@ namespace qdml
       typedef class vecN<T,len> my_type;
       typedef T element_type;
 
-      //default constructor, does nothing
+      //@brief Create an unintialized vecN
       inline vecN()
       {
 
       }
 
-      //copy constructor
+      // @brief Create a vector from another vector. This should be of the same length.
+      // @tparam that the existing vector to be used to create the new vector.
       inline vecN( const vecN& that )
       {
         assign( that );
       }
 
 
-      //construct a vector from a scalar
+      // @brief Create a vector consisting entirely of a scalar s.
+      // Each element is set to the value that is given.
+      // @tparam s Scalar value that the vector will be initialized to.
       inline vecN( T s )
       {
         for( int n = 0; n < len; ++n )
